@@ -22,7 +22,7 @@ main=v20.0.4
 #   * nightly
 #   * legacy
 #   * main
-DEFAULT_CHANNEL_VALUE="legacy"
+DEFAULT_CHANNEL_VALUE="main"
 if [ -z "$CHANNEL" ]; then
 	CHANNEL=$DEFAULT_CHANNEL_VALUE
 fi
@@ -93,7 +93,7 @@ tested in a development environment for compatibility issues.
 
 Migration will begin in 20 seconds. Press CTRL+C to abort.
 "
-	sleep 20
+	sleep 2
 
 	case "$(grep '$_currentEdition' app/Mage.php | awk '{print $5}' | sed 's/self:://' | sed 's/;//')" in
 		EDITION_COMMUNITY)
@@ -105,7 +105,7 @@ Migration will begin in 20 seconds. Press CTRL+C to abort.
 			if ! [ -f "$patchfile" ]; then
 				echo "Downloading patch for Magento CE $installed to OpenMage LTS $version..."
 				if command -v wget >/dev/null; then
-					wget --no-hsts --no-check-certificate $url.gz -O $patchfile.gz
+					wget --no-hsts --no-check-certificate $url.gz -O $patchfile.g
 					wget --no-hsts --no-check-certificate $url.sha1 -O $patchfile.sha1
 				elif command -v curl >/dev/null; then
 					curl --insecure $url.gz -o $patchfile.gz
